@@ -1,4 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <style>
+    @keyframes flapLeft {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-15deg); }
+    }
+    @keyframes flapRight {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(15deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; filter: drop-shadow(0 0 2px cyan); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-3px); }
+    }
+    #fly-body {
+      animation: float 3s ease-in-out infinite;
+    }
+    .left-wing {
+      transform-origin: 40px 40px;
+      animation: flapLeft 0.05s infinite alternate linear;
+    }
+    .right-wing {
+      transform-origin: 60px 40px;
+      animation: flapRight 0.05s infinite alternate linear;
+    }
+    .node {
+      animation: pulse 1.5s infinite;
+    }
+    .node-1 { animation-delay: 0.0s; }
+    .node-2 { animation-delay: 0.4s; }
+    .node-3 { animation-delay: 0.8s; }
+  </style>
+  
   <g id="fly-body">
     <!-- Abdomen -->
     <ellipse cx="50" cy="65" rx="15" ry="25" fill="#2c3e50" />
@@ -14,18 +50,19 @@
     <!-- Eyes -->
     <ellipse cx="42" cy="20" rx="4" ry="6" fill="#e74c3c" />
     <ellipse cx="58" cy="20" rx="4" ry="6" fill="#e74c3c" />
-  </g>
-  
-  <g id="fly-wings" opacity="0.6">
-    <!-- Left Wing -->
-    <path d="M 40 40 Q 10 20 20 60 Q 30 70 40 40" fill="#bdc3c7" />
-    <!-- Right Wing -->
-    <path d="M 60 40 Q 90 20 80 60 Q 70 70 60 40" fill="#bdc3c7" />
-  </g>
+    
+    <!-- Wings inside the float group so they move with body -->
+    <g opacity="0.6">
+      <!-- Left Wing -->
+      <path class="left-wing" d="M 40 40 Q 10 20 20 60 Q 30 70 40 40" fill="#bdc3c7" />
+      <!-- Right Wing -->
+      <path class="right-wing" d="M 60 40 Q 90 20 80 60 Q 70 70 60 40" fill="#bdc3c7" />
+    </g>
 
-  <!-- Connectome glowing nodes overlay (conceptual) -->
-  <circle cx="50" cy="22" r="2" fill="#3498db" />
-  <circle cx="48" cy="18" r="1.5" fill="#2ecc71" />
-  <circle cx="52" cy="18" r="1.5" fill="#f1c40f" />
-  <path d="M 50 22 L 48 18 L 52 18 Z" stroke="#3498db" stroke-width="0.5" fill="none" opacity="0.5" />
+    <!-- Connectome glowing nodes overlay (conceptual) -->
+    <circle class="node node-1" cx="50" cy="22" r="2" fill="#00ffff" />
+    <circle class="node node-2" cx="48" cy="18" r="1.5" fill="#00ff9d" />
+    <circle class="node node-3" cx="52" cy="18" r="1.5" fill="#ff00ff" />
+    <path class="node node-1" d="M 50 22 L 48 18 L 52 18 Z" stroke="#00ffff" stroke-width="0.5" fill="none" opacity="0.5" />
+  </g>
 </svg>
