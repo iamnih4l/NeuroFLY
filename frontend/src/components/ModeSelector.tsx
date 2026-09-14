@@ -42,10 +42,10 @@ const ModeSelector: React.FC<ModeSelectorProps> = ({ onSelectMode }) => {
           onClick={() => onSelectMode('REPLAY')}
         >
           <div className="flex justify-between items-center mb-2">
-            <h2 className="text-xl text-gray-400 tracking-widest font-bold group-hover:text-white">REPLAY</h2>
+            <h2 className="text-xl text-gray-400 tracking-widest font-bold group-hover:text-white">MULTI-FLY COMPARISON</h2>
             <span className="text-gray-600 group-hover:text-gray-400">→</span>
           </div>
-          <p className="text-gray-500 text-xs">Review historical computational responses.</p>
+          <p className="text-gray-500 text-xs">Real-time multi-subject observation and comparison.</p>
         </button>
       </div>
 

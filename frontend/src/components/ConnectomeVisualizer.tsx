@@ -12,14 +12,14 @@ interface ConnectomeVisualizerProps {
   targetBodyId?: string | null;
   edgeAblation?: { source: string; target: string } | null;
   lookInsideTrigger?: number;
-  fitViewTrigger?: number;
   activityLevel?: number;
   positionOffset?: [number, number, number];
+  activeNeuronIds?: number[];
 }
 
 const SCALE = 0.001; // NeuPrint coordinates are in nm/voxels and very large
 
-export default function ConnectomeVisualizer({ experimentId, currentEpoch, onSelectNeuron, visualMode, targetBodyId, edgeAblation, lookInsideTrigger = 0, fitViewTrigger = 0, activityLevel = 0, positionOffset = [0, 0, 0] }: ConnectomeVisualizerProps) {
+export default function ConnectomeVisualizer({ experimentId, currentEpoch, onSelectNeuron, visualMode, targetBodyId, edgeAblation, lookInsideTrigger = 0, fitViewTrigger = 0, activityLevel = 0, positionOffset = [0, 0, 0], activeNeuronIds = [] }: ConnectomeVisualizerProps) {
   const pointsRef = useRef<THREE.Points>(null);
   const [nodes, setNodes] = useState<any[]>([]);
   const [edges, setEdges] = useState<any[]>([]);
@@ -168,7 +168,11 @@ export default function ConnectomeVisualizer({ experimentId, currentEpoch, onSel
       const type = (node.cell_type || '').toUpperCase();
       let r = 0.1, g = 0.8, b = 0.7; // Default KC
       
-      if (targetBodyId && node.body_id === targetBodyId) {
+      const isActive = activeNeuronIds.includes(i);
+      
+      if (isActive) {
+        r = 0.4; g = 1.0; b = 1.0; // Bright cyan flash for active neurons
+      } else if (targetBodyId && node.body_id === targetBodyId) {
         // Highlight research target
         r = 0.2; g = 1.0; b = 0.2; // Bright green
       } else if (type.includes('DAN') || type.includes('PAM')) {
@@ -191,7 +195,7 @@ export default function ConnectomeVisualizer({ experimentId, currentEpoch, onSel
     });
     
     return [pos, col];
-  }, [nodes, center, currentMetric]);
+  }, [nodes, center, currentMetric, activeNeuronIds]);
 
   // 2. Construct Skeleton (LineSegments) Buffer
   const skeletonGeometry = useMemo(() => {

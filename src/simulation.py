@@ -185,6 +185,7 @@ class NeuroFlySimulator:
             
         recent_spikes_i = active_monitor.i[spikes_start:]
         active_neurons_count = len(np.unique(recent_spikes_i))
+        active_neuron_ids = [int(idx) for idx in np.unique(recent_spikes_i)]
             
         # Manual MVP Plasticity Rule (Applied end of epoch)
         # If PAM was active (positive valence), we increase weights from active KCs to MBONs.
@@ -201,6 +202,7 @@ class NeuroFlySimulator:
             "spikes_post": spikes_post,
             "total_spikes": spikes_baseline + spikes_stimulus + spikes_post,
             "active_neurons": active_neurons_count,
+            "active_neuron_ids": active_neuron_ids,
             "window_duration_ms": window_ms
         }
             

@@ -122,6 +122,7 @@ def run_multifly_step(body_id: int):
             "simulation": {
                 "total_spikes": int(sim_result.get('total_spikes', 0)),
                 "active_neurons": int(sim_result.get('active_neurons', 0)),
+                "active_neuron_ids": sim_result.get('active_neuron_ids', []),
                 "duration_ms": float(sim_result.get('window_duration_ms', 0.0) * 3)
             }
         })

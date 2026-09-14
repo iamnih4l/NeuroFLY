@@ -23,11 +23,10 @@ class YouTubeLiveProvider(NewsProvider):
         try:
             # Step 1: Search for active live streams
             search_url = "https://www.googleapis.com/youtube/v3/search?part=snippet&eventType=live&type=video"
+            encoded_query = urllib.parse.quote(self.query)
+            search_url += f"&q={encoded_query}"
             if self.channel_id:
                 search_url += f"&channelId={self.channel_id}"
-            else:
-                encoded_query = urllib.parse.quote(self.query)
-                search_url += f"&q={encoded_query}"
                 
             search_url += f"&maxResults={limit}&key={self.api_key}"
             

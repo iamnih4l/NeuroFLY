@@ -37,12 +37,7 @@ function App() {
       const res = await fetch('http://localhost:3001/api/watch/step');
       const data = await res.json();
       if (data && data.news_item) {
-        setNewsItem({
-          ...data.news_item,
-          publishedAt: data.news_item.published_at || new Date().toISOString(),
-          imageUrl: data.news_item.image_url,
-          isDemo: data.news_item.is_demo === 1
-        });
+        setNewsItem(data.news_item);
         setNeuroState(data.neuro_state);
         setFeatures(data.features);
         
@@ -142,6 +137,7 @@ function App() {
   
   let currentSpikes = history.length > 0 ? history[history.length - 1].spikes : 0;
   let currentActiveNeurons = currentSpikes > 0 ? Math.floor(currentSpikes / 2) : 0;
+  let currentActiveNeuronIds = history.length > 0 ? (history[history.length - 1].simulation?.active_neuron_ids || []) : [];
 
   return (
     <div className="w-screen h-screen relative bg-[#020406] overflow-hidden select-none font-mono">
@@ -149,6 +145,15 @@ function App() {
       {/* Mode Selection Layer */}
       {appState === 'MODE_SELECT' && (
         <ModeSelector onSelectMode={(mode) => setAppState(mode === 'WATCH' ? 'WATCH_MODE' : (mode === 'EXPOSURE' ? 'EXPOSURE_MODE' : 'REPLAY'))} />
+      )}
+
+      {showScientificUI && (
+        <button 
+          onClick={() => setAppState('MODE_SELECT')}
+          className="absolute top-4 left-4 z-50 px-3 py-1 bg-black/60 border border-gray-800 text-gray-400 text-[10px] font-bold tracking-widest hover:text-white hover:border-gray-500 transition-colors pointer-events-auto backdrop-blur-sm"
+        >
+          ← BACK TO MODES
+        </button>
       )}
 
       {/* Main Observation Experience */}
@@ -165,7 +170,7 @@ function App() {
           {/* Left Column (Input & FlyTV) */}
           <div className="relative h-full flex flex-col items-center justify-center border-r border-gray-800 bg-[#020406]/90 z-10 p-4">
              {/* Header */}
-             <div className="absolute top-4 left-4 z-10 text-[10px] font-bold tracking-widest pointer-events-none text-gray-500">
+             <div className="absolute top-12 left-4 z-10 text-[10px] font-bold tracking-widest pointer-events-none text-gray-500">
                NEUROFLY <span className="text-cyan-500 mx-2">|</span> WATCH
              </div>
 
@@ -210,6 +215,7 @@ function App() {
                   lookInsideTrigger={lookInsideTrigger}
                   fitViewTrigger={fitViewTrigger}
                   activityLevel={currentSpikes}
+                  activeNeuronIds={currentActiveNeuronIds}
                 />
               </Canvas>
             </div>

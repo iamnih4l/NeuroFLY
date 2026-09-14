@@ -134,6 +134,7 @@ const MultiFlyComparison: React.FC<MultiFlyComparisonProps> = ({ multiflyState, 
           {multiflyState.map((fly, idx) => {
              // If error, don't render a connectome for this slot (or render zero activity)
              const spikes = fly.error ? 0 : (fly.simulation?.total_spikes || 0);
+             const activeIds = fly.error ? [] : (fly.simulation?.active_neuron_ids || []);
              return (
                <ConnectomeVisualizer 
                  key={fly.fly_id || idx}
@@ -146,6 +147,7 @@ const MultiFlyComparison: React.FC<MultiFlyComparisonProps> = ({ multiflyState, 
                  fitViewTrigger={fitViewTrigger}
                  activityLevel={spikes}
                  positionOffset={offsets[idx]}
+                 activeNeuronIds={activeIds}
                />
              );
           })}
