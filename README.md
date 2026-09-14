@@ -15,7 +15,7 @@
 ## 🪰 So I Made the Fly Watch Something.
 
 <div align="center">
-  <img src="assets/neurofly/readme/fly-watching-world.svg" width="100%" alt="NeuroFly Hero Visual">
+  <img src="assets/neurofly/readme/fly-watching-world.png" width="100%" alt="NeuroFly Hero Visual">
 </div>
 
 The original idea was simple:
