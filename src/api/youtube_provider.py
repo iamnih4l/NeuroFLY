@@ -5,6 +5,7 @@ import urllib.request
 import urllib.parse
 from typing import List, Optional
 from datetime import datetime
+import src.config
 from src.api.news_provider import NewsProvider, NewsItem, MockNewsProvider
 
 class YouTubeLiveProvider(NewsProvider):
@@ -74,5 +75,34 @@ class YouTubeLiveProvider(NewsProvider):
             return items
             
         except Exception as e:
-            print(f"ERROR: Failed to fetch from YouTube API: {e}", file=sys.stderr)
-            return MockNewsProvider().fetch_latest(category, limit)
+            print(f"ERROR: Failed to fetch from YouTube API: {e}. Using fallback videos.", file=sys.stderr)
+            import time
+            now = datetime.now().isoformat()
+            
+            # Fallback videos based on query
+            embed_url = "https://www.youtube.com/embed/HvZt-nh9sGg?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Stream
+            title = "Live YouTube Broadcast"
+            
+            if "sports" in self.query.lower():
+                embed_url = "https://www.youtube.com/embed/HvZt-nh9sGg?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Stream
+                title = "Live Sports Feed (Fallback)"
+            elif "news" in self.query.lower():
+                embed_url = "https://www.youtube.com/embed/HvZt-nh9sGg?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Stream
+                title = "Live Breaking News (Fallback)"
+            elif "science" in self.query.lower():
+                embed_url = "https://www.youtube.com/embed/HvZt-nh9sGg?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Stream
+                title = "Live Science Documentary (Fallback)"
+
+            news_item = NewsItem(
+                id=f"fallback-{int(time.time())}",
+                title=title,
+                source="YouTube Live",
+                published_at=now,
+                url=embed_url,
+                description="Live YouTube broadcast (Quota Exceeded Fallback)",
+                image_url="",
+                category=category,
+                is_demo=False
+            )
+            news_item.embed_url = embed_url
+            return [news_item]

@@ -6,6 +6,7 @@ import urllib.parse
 from abc import ABC, abstractmethod
 from typing import List, Dict, Optional
 from datetime import datetime
+import src.config
 
 class NewsItem:
     def __init__(self, id: str, title: str, source: str, published_at: str, 
