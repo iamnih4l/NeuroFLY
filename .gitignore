@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Project output
+output/
+
+# Data cache (ignore large CSVs or datasets)
+data/
+*.feather
+*.parquet
+
+node_modules/
+scratch/
