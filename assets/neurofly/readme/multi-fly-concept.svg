@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350" width="100%" height="auto">
+  <defs>
+    <style>
+      .box { fill: #0d1117; stroke: #30363d; stroke-width: 2; rx: 5; }
+      .text-title { font-family: monospace; font-size: 14px; font-weight: bold; fill: #fff; text-anchor: middle; }
+      .text-sub { font-family: monospace; font-size: 10px; fill: #8b949e; text-anchor: middle; }
+      .line { stroke: #30363d; stroke-width: 2; fill: none; }
+      .pulse-line { stroke: #00ffff; stroke-width: 2; fill: none; stroke-dasharray: 5 5; }
+      @keyframes flow {
+        0% { stroke-dashoffset: 10; }
+        100% { stroke-dashoffset: 0; }
+      }
+      .anim-flow { animation: flow 0.5s linear infinite; }
+    </style>
+  </defs>
+
+  <rect width="800" height="350" fill="#010409" />
+
+  <!-- World Feeds -->
+  <g transform="translate(150, 40)">
+    <rect class="box" x="-60" y="0" width="120" height="50" />
+    <text class="text-title" x="0" y="25">SPORTS</text>
+    <text class="text-sub" x="0" y="40">Live World Feed</text>
+  </g>
+  <g transform="translate(400, 40)">
+    <rect class="box" x="-60" y="0" width="120" height="50" />
+    <text class="text-title" x="0" y="25">NEWS</text>
+    <text class="text-sub" x="0" y="40">Live World Feed</text>
+  </g>
+  <g transform="translate(650, 40)">
+    <rect class="box" x="-60" y="0" width="120" height="50" />
+    <text class="text-title" x="0" y="25">SCIENCE</text>
+    <text class="text-sub" x="0" y="40">Live World Feed</text>
+  </g>
+
+  <!-- Connection Lines Down -->
+  <path class="pulse-line anim-flow" d="M 150 90 L 150 140" />
+  <path class="pulse-line anim-flow" d="M 400 90 L 400 140" stroke="#ff00ff" />
+  <path class="pulse-line anim-flow" d="M 650 90 L 650 140" stroke="#00ff9d" />
+
+  <!-- Model Instances -->
+  <g transform="translate(150, 140)">
+    <rect class="box" x="-70" y="0" width="140" height="60" stroke="#00ffff" />
+    <text class="text-title" x="0" y="25">FLY 01 STATE</text>
+    <text class="text-sub" x="0" y="40">Computational Model A</text>
+  </g>
+  <g transform="translate(400, 140)">
+    <rect class="box" x="-70" y="0" width="140" height="60" stroke="#ff00ff" />
+    <text class="text-title" x="0" y="25">FLY 02 STATE</text>
+    <text class="text-sub" x="0" y="40">Computational Model B</text>
+  </g>
+  <g transform="translate(650, 140)">
+    <rect class="box" x="-70" y="0" width="140" height="60" stroke="#00ff9d" />
+    <text class="text-title" x="0" y="25">FLY 03 STATE</text>
+    <text class="text-sub" x="0" y="40">Computational Model C</text>
+  </g>
+
+  <!-- Convergence Lines -->
+  <path class="line" d="M 150 200 C 150 230 400 230 400 250" />
+  <path class="line" d="M 400 200 L 400 250" />
+  <path class="line" d="M 650 200 C 650 230 400 230 400 250" />
+
+  <!-- Shared Connectome -->
+  <g transform="translate(400, 250)">
+    <rect class="box" x="-150" y="0" width="300" height="60" stroke="#fff" />
+    <text class="text-title" x="0" y="25">SHARED MALECNS ANATOMY</text>
+    <text class="text-sub" x="0" y="40">Comparative WebGL Visualization</text>
+  </g>
+</svg>

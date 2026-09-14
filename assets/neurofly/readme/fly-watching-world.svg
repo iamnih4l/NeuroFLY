@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="auto">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0ff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a192f"/>
+      <stop offset="100%" stop-color="#020c1b"/>
+    </linearGradient>
+    <!-- Filter for CRT scanlines -->
+    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#000" fill-opacity="0.2"/>
+    </pattern>
+    <!-- Fly Animations -->
+    <style>
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(5deg); }
+        50% { transform: translateY(-10px) rotate(-5deg); }
+      }
+      @keyframes flapLeft {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(-15deg); }
+      }
+      @keyframes flapRight {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(15deg); }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; filter: drop-shadow(0 0 2px cyan); }
+      }
+      @keyframes flicker {
+        0%, 100% { opacity: 1; }
+        90% { opacity: 0.8; }
+        95% { opacity: 1; }
+        98% { opacity: 0.7; }
+      }
+      #fly-container {
+        animation: float 4s ease-in-out infinite;
+        transform-origin: 200px 200px;
+      }
+      .left-wing {
+        transform-origin: 40px 40px;
+        animation: flapLeft 0.05s infinite alternate linear;
+      }
+      .right-wing {
+        transform-origin: 60px 40px;
+        animation: flapRight 0.05s infinite alternate linear;
+      }
+      .node {
+        animation: pulse 1.5s infinite;
+      }
+      .node-1 { animation-delay: 0.0s; }
+      .node-2 { animation-delay: 0.4s; }
+      .node-3 { animation-delay: 0.8s; }
+      .tv-screen {
+        animation: flicker 5s infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- Background Environment -->
+  <rect width="800" height="400" fill="#010409" />
+  
+  <!-- Desk/Lab Table -->
+  <path d="M 0 350 L 800 350 L 800 400 L 0 400 Z" fill="#0d1117" />
+  <path d="M 0 350 L 800 350" stroke="#30363d" stroke-width="2" />
+
+  <!-- Background Wiring / Lab feel -->
+  <path d="M 300 0 C 300 100 400 150 400 350" stroke="#21262d" stroke-width="4" fill="none" opacity="0.5"/>
+  <path d="M 450 0 C 450 150 500 200 550 350" stroke="#21262d" stroke-width="2" fill="none" opacity="0.5"/>
+  <circle cx="400" cy="330" r="4" fill="#30363d"/>
+  <circle cx="540" cy="340" r="3" fill="#30363d"/>
+
+  <!-- TV Set -->
+  <g transform="translate(400, 70)">
+    <!-- Stand -->
+    <path d="M 120 280 L 180 280 L 160 300 L 140 300 Z" fill="#161b22"/>
+    <rect x="80" y="270" width="140" height="10" fill="#21262d"/>
+    <!-- Outer TV Box -->
+    <rect x="0" y="0" width="300" height="230" rx="10" ry="10" fill="#0d1117" stroke="#30363d" stroke-width="4"/>
+    <rect x="10" y="10" width="280" height="210" rx="5" ry="5" fill="#161b22" />
+    
+    <!-- Glow behind screen -->
+    <circle cx="150" cy="115" r="150" fill="url(#glow)"/>
+    
+    <!-- Screen -->
+    <rect class="tv-screen" x="15" y="15" width="270" height="200" fill="url(#screen)" stroke="#00ffff" stroke-width="1" stroke-opacity="0.3"/>
+    
+    <!-- Screen Content: World Map -->
+    <g opacity="0.4" fill="#3498db">
+      <!-- Abstract World Map -->
+      <path d="M 40 80 Q 50 60 70 70 T 90 90 T 70 120 Z"/>
+      <path d="M 130 50 Q 170 30 200 60 T 220 130 T 160 160 T 120 100 Z"/>
+      <path d="M 230 80 Q 250 70 260 90 T 240 120 Z"/>
+    </g>
+    <!-- Screen Content: News Overlays -->
+    <rect x="15" y="175" width="270" height="40" fill="#e74c3c" opacity="0.9"/>
+    <text x="25" y="193" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">LIVE</text>
+    <text x="70" y="193" fill="#fff" font-family="monospace" font-size="12">BREAKING NEWS</text>
+    <rect x="15" y="200" width="270" height="15" fill="#fff" opacity="0.9"/>
+    <text x="25" y="211" fill="#000" font-family="monospace" font-size="10">GLOBAL FEED ACTIVE | NEUROFLY SENSORY INJECTOR ONLINE...</text>
+    
+    <circle cx="270" cy="30" r="4" fill="#e74c3c">
+      <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- CRT Scanlines Overlay -->
+    <rect x="15" y="15" width="270" height="200" fill="url(#scanlines)"/>
+  </g>
+
+  <!-- Fly Sprite Component (Copied exact paths, scaled up) -->
+  <!-- Left Side: Hovering Fly -->
+  <g id="fly-container" transform="translate(100, 100)">
+    <!-- Scale fly sprite up to look at TV -->
+    <g transform="scale(2.5)">
+      <g id="fly-body">
+        <!-- Abdomen -->
+        <ellipse cx="50" cy="65" rx="15" ry="25" fill="#2c3e50" />
+        <path d="M 35 65 Q 50 75 65 65" stroke="#34495e" stroke-width="2" fill="none" />
+        <path d="M 36 75 Q 50 85 64 75" stroke="#34495e" stroke-width="2" fill="none" />
+        
+        <!-- Thorax -->
+        <circle cx="50" cy="40" r="16" fill="#34495e" />
+        
+        <!-- Head -->
+        <circle cx="50" cy="22" r="10" fill="#2c3e50" />
+        
+        <!-- Eyes -->
+        <ellipse cx="42" cy="20" rx="4" ry="6" fill="#e74c3c" />
+        <ellipse cx="58" cy="20" rx="4" ry="6" fill="#e74c3c" />
+        
+        <!-- Wings inside the float group so they move with body -->
+        <g opacity="0.6">
+          <path class="left-wing" d="M 40 40 Q 10 20 20 60 Q 30 70 40 40" fill="#bdc3c7" />
+          <path class="right-wing" d="M 60 40 Q 90 20 80 60 Q 70 70 60 40" fill="#bdc3c7" />
+        </g>
+
+        <!-- Connectome glowing nodes overlay (conceptual) -->
+        <circle class="node node-1" cx="50" cy="22" r="2" fill="#00ffff" />
+        <circle class="node node-2" cx="48" cy="18" r="1.5" fill="#00ff9d" />
+        <circle class="node node-3" cx="52" cy="18" r="1.5" fill="#ff00ff" />
+        <path class="node node-1" d="M 50 22 L 48 18 L 52 18 Z" stroke="#00ffff" stroke-width="0.5" fill="none" opacity="0.5" />
+      </g>
+    </g>
+  </g>
+
+  <!-- Fly gaze beams / connection to TV -->
+  <path d="M 230 150 Q 300 130 410 160" stroke="#00ffff" stroke-width="1" stroke-dasharray="5 5" fill="none" opacity="0.5">
+    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="0.5s" repeatCount="indefinite" />
+  </path>
+  <path d="M 260 170 Q 350 180 410 190" stroke="#00ff9d" stroke-width="1" stroke-dasharray="5 5" fill="none" opacity="0.5">
+    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="0.5s" repeatCount="indefinite" />
+  </path>
+
+</svg>

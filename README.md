@@ -12,110 +12,124 @@
 >
 > But that's actually possible now.
 
-**Meet NeuroFly.** 
+## 🪰 So I Made the Fly Watch Something.
 
-NeuroFly asks a slightly different question: What happens when we give a computational neural model built on a *real fly connectome* something to watch?
+<div align="center">
+  <img src="assets/neurofly/readme/fly-watching-world.svg" width="100%" alt="NeuroFly Hero Visual">
+</div>
 
-NeuroFly combines real *Drosophila melanogaster* male CNS connectome data with a computational spiking neural model and real-world media inputs to explore how different stimuli produce different modeled brain states.
+The original idea was simple:
 
----
+What if a fly could watch the same world that we watch?
 
-## 🎬 See it in Action
+Not a cartoon fly.
 
-<video src="https://github.com/iamnih4l/NeuroFLY/raw/main/assets/neurofly/demo.mp4" autoplay loop muted playsinline width="100%"></video>
+Not a fictional brain.
 
-*(Note: If the video above does not play, ensure you have uploaded `demo.mp4` to `assets/neurofly/demo.mp4` in your repository!)*
+A fly represented using a real connectome, connected to a computational neural model.
 
----
-
-## 🧠 What is Real vs Computational?
-
-NeuroFly explores the intersection of empirical anatomy and computational dynamics.
-
-- 🔬 **The anatomy is real.** The structural foundation of the network is the `male-cns:v1.0` dataset from Janelia FlyEM. The somas, skeletons, and synaptic graphs exist exactly as mapped in biology.
-- 📡 **The stimulus can be real.** The system takes live video feeds (like YouTube news or sports) and extracts visual/semantic features to drive sensory neurons.
-- ⚡ **The neural activity is modeled.** We simulate dynamics using the Brian2 Leaky Integrate-and-Fire engine. The spikes, habituation, and "dopaminergic" states you see are *computationally derived* from the structural graph's response to the stimulus. 
+NeuroFly uses a real *Drosophila melanogaster* MaleCNS connectome as the structural foundation for a computational model. We pump live video and text feeds from the real world straight into a spiking neural network modeled directly over this anatomical wiring.
 
 ---
 
-## 🏗 System Architecture & Flow
+## 🎬 WATCH THE FLY WATCH THE WORLD
 
-NeuroFly is a heavily decoupled system designed to pump millions of graph vertices to your GPU while simultaneously running a spiking simulation in Python.
+<!-- DEMO VIDEO PLACEHOLDER
+     Replace DEMO_VIDEO_URL with the GitHub-hosted video URL
+     once the demo is uploaded to the designated issue.
+-->
+<video src="DEMO_VIDEO_URL" autoplay loop muted playsinline controls width="100%">
+  <!-- Fallback if GitHub strips the video tag -->
+  <img src="assets/neurofly/readme/demo-preview.svg" width="100%" alt="Demo Preview Placeholder">
+</video>
 
-### 1. Data Flow
+*(Note: The final demo video placeholder above will be replaced once the issue-hosted demo asset is available.)*
 
-```mermaid
-flowchart LR
-    A((World Feed)) -->|Video/Text| B[Sensory Encoder]
-    B -->|Novelty/Valence| C(Spike Injector)
-    C -->|Poisson Rates| D{Brian2 Simulator}
-    
-    db[(MaleCNS v1.0)] -->|Graph Topology| D
-    
-    D -->|Neural State| E[(SQLite)]
-    E -->|Polling| F[WebGL Visualizer]
-    
-    style A fill:#e74c3c,stroke:#c0392b,color:#fff
-    style db fill:#3498db,stroke:#2980b9,color:#fff
-    style D fill:#9b59b6,stroke:#8e44ad,color:#fff
-    style F fill:#2ecc71,stroke:#27ae60,color:#fff
-```
+---
 
-### 2. Tech Stack Layers
+## 🧠 What Is Happening Inside the Fly?
+
+When a live world feed is processed, NeuroFly extracts visual and semantic features—brightness, edge density, novelty, and valence. These computational features are mathematically translated into sensory stimuli (Poisson spike rates) that are injected into the visual and olfactory projection neurons of the modeled graph. 
+
+<div align="center">
+  <img src="assets/neurofly/readme/computational-signal.svg" width="100%" alt="Illustrative computational signal">
+</div>
+
+### The Computational Pipeline
 
 ```mermaid
 flowchart TD
-    subgraph DataLayer [Data Layer]
-        A[YouTube/News Live Input] --> B[Visual & Semantic Extraction]
-    end
-
-    subgraph SimulationLayer [Simulation Layer - Python]
-        B --> |Poisson Rates| C[Brian2 LIF Engine]
-        D["NeuPrint MaleCNS v1.0"] --> |Structure| C
-    end
-
-    subgraph FrontendLayer [Frontend Layer - Node.js & React]
-        C -.-> |State Polling| F[Express Backend]
-        F -.-> G[React UI + Three.js]
-        G <--> H[WebGL Connectome Renderer]
-    end
+    W[🌍 THE WORLD] -->|NEWS / MEDIA| F[VISUAL + SEMANTIC FEATURES]
+    F -->|COMPUTATIONAL SENSORY STATE| B[BRIAN2 MODEL]
+    B -->|MODELED ACTIVITY| M[MALECNS GRAPH]
+    M -->|🧠 3D CONNECTOME| V[WebGL Visualization]
+    
+    style W fill:#161b22,stroke:#30363d,color:#fff
+    style F fill:#0d1117,stroke:#00ffff,color:#fff
+    style B fill:#0d1117,stroke:#ff00ff,color:#fff
+    style M fill:#0d1117,stroke:#00ff9d,color:#fff
+    style V fill:#21262d,stroke:#30363d,color:#fff
 ```
 
 ---
 
-## 🪰 Real-Time Multi-Fly Comparison
+## 🪰🪰🪰 Three Flies. Three Worlds.
 
 What happens if one fly watches live sports, while another watches breaking news, and a third watches a space launch?
 
-NeuroFly allows you to run multiple independent computational states over the single shared anatomical graph structure:
+<div align="center">
+  <img src="assets/neurofly/readme/multi-fly-concept.svg" width="100%" alt="Multi-Fly Concept">
+</div>
 
-```mermaid
-flowchart TD
-    W((World Data))
-    W -->|Live Sports| F1(Fly 01)
-    W -->|Live News| F2(Fly 02)
-    W -->|Live Science| F3(Fly 03)
+NeuroFly allows you to run multiple independent computational states over the single shared anatomical graph structure. Compare their computational states, sensory adaptation, and abstract modulatory levels in a synchronized real-time view.
 
-    F1 -->|Stimulus| M1[Simulation Model A]
-    F2 -->|Stimulus| M2[Simulation Model B]
-    F3 -->|Stimulus| M3[Simulation Model C]
-
-    M1 --> S(Shared MaleCNS WebGL Structure)
-    M2 --> S
-    M3 --> S
-
-    S --> V{Synchronized Comparative View}
-    
-    style W fill:#f39c12,stroke:#d35400,color:#fff
-    style S fill:#3498db,stroke:#2980b9,color:#fff
-    style V fill:#2ecc71,stroke:#27ae60,color:#fff
-```
-
-Compare their computational states, sensory adaptation, and abstract modulatory (dopaminergic) levels in real-time.
+*(Note: These are independent computational model instances, not biological experiments with actual living flies.)*
 
 ---
 
-## 🚀 Quick Start
+## 🧬 What Is Actually Real?
+
+NeuroFly provides an aesthetic, computational exploration of empirical anatomy. 
+
+| Layer | Status |
+|---|---|
+| MaleCNS structure | **REAL DATA** |
+| Neuron identities | **REAL DATA** |
+| Structural connectivity | **REAL DATA** |
+| World/media input | **REAL INPUT** when available |
+| Feature extraction | **COMPUTATIONAL** |
+| Spiking activity | **MODEL-DERIVED** |
+| Adaptation | **MODEL-DERIVED** |
+| Dopaminergic state | **MODEL-DERIVED** |
+| Consciousness | **NOT CLAIMED** |
+
+<br/>
+
+<div align="center">
+  <h3 style="color: #00ffff; font-family: monospace;">The wiring is real.<br/>The world can be real.<br/>The reaction is modeled.</h3>
+</div>
+
+<br/>
+
+**What it does NOT claim:**
+- It does **not** read the subjective mind of a fly.
+- It does **not** measure a living fly's dopamine levels or empirical neural activity.
+- It does **not** prove that a fly experiences human-like emotion based on the visualized state.
+
+---
+
+## 🏗 How Does It Work?
+
+NeuroFly is a heavily decoupled system designed to pump millions of graph vertices to your GPU while simultaneously running a spiking simulation in Python.
+
+- **The Data Layer:** Live APIs pull world streams (like YouTube) and extract statistical visual/semantic feature vectors.
+- **The Simulation Layer:** Python daemon utilizing the `Brian2` Leaky Integrate-and-Fire engine simulates the graph state.
+- **The Structural Layer:** `NeuPrint` and the `male-cns:v1.0` dataset provide the graph topology.
+- **The Presentation Layer:** A Node.js/Express backend serves state to a React frontend, mapping the simulated data onto a WebGL (Three.js) rendering of the actual neuron skeletons.
+
+---
+
+## 🚀 How Do I Run It?
 
 Ensure you have Python 3.10+ and Node.js v18+.
 
@@ -136,51 +150,38 @@ cd ..
 ```
 
 **3. Configure Environment**
-Copy `.env.example` to `.env`. (If using Local Data Mode, add your NeuPrint token here).
+Copy `.env.example` to `.env`.
 ```bash
 cp .env.example .env
 ```
 
 **4. Start NeuroFly**
-Run the backend API:
+Start the backend server:
 ```bash
 cd frontend/server
 node server.js
 ```
-Run the frontend (in a new terminal):
+Start the frontend UI (in a new terminal):
 ```bash
 cd frontend
 npm run dev
 ```
 
-For full setup (including massive local data downloads), see [Setup Guide](docs/SETUP.md).
+For advanced setup and data management, see the [Setup Guide](docs/SETUP.md).
 
 ---
 
-## 🔬 What NeuroFly Does — and Doesn't Claim
+## 🧪 Want to Make the Fly Stranger?
 
-NeuroFly provides an aesthetic, computational exploration of empirical anatomy.
+NeuroFly is open source. 
 
-**What it does NOT claim:**
-- It does **not** read the subjective mind of a fly.
-- It does **not** measure a living fly's dopamine levels or empirical neural activity.
-- It does **not** prove that a fly experiences human-like emotion based on the visualized state.
+If you are interested in computational neuroscience, connectomics, 3D visualization, simulation, weird experiments, or creative coding—we welcome you to break it and build upon it! 
 
-Read more in our [Science Guide](docs/SCIENCE.md) and [Data Provenance Guide](docs/DATA.md).
-
----
-
-## 🤝 Open Source & Contributing
-
-NeuroFly is an OPEN SOURCE project! 
-
-We welcome contributions from developers, researchers, and enthusiasts. Whether you want to improve the WebGL rendering, refine the spiking neural models, or add new input feeds, we'd love your help.
-
-Check out [CONTRIBUTING.md](CONTRIBUTING.md) and our [Development Guide](docs/DEVELOPMENT.md) to get started!
+Check out [CONTRIBUTING.md](CONTRIBUTING.md) and our [Development Guide](docs/DEVELOPMENT.md) to get started.
 
 ---
 
 ## 📜 License & Credits
 
 - **Code License:** MIT
-- **Data Source:** The `male-cns:v1.0` connectome is graciously provided by Google Research and HHMI Janelia. Please adhere to the Janelia FlyEM licensing requirements when publishing research based on this data.
+- **Data Source:** The `male-cns:v1.0` connectome is graciously provided by Google Research and HHMI Janelia. Please adhere to the Janelia FlyEM licensing requirements when publishing research based on this data. Read more in our [Data Provenance Guide](docs/DATA.md).
