@@ -80,13 +80,13 @@ class YouTubeLiveProvider(NewsProvider):
             now = datetime.now().isoformat()
             
             # Fallback videos based on query
-            embed_url = "https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # Default to News
+            embed_url = "https://www.youtube.com/embed/GotlA1KKWoo?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # Watch Mode Default
             title = "Live YouTube Broadcast"
             
             if "sports" in self.query.lower():
                 embed_url = "https://www.youtube.com/embed/PMDQ82w1pAE?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Sports Stream
                 title = "Live Sports Feed"
-            elif "news" in self.query.lower():
+            elif "breaking" in self.query.lower(): # Differentiates Multi-Fly 'live breaking news' from Watch Mode
                 embed_url = "https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom News Stream
                 title = "Live Breaking News"
             elif "science" in self.query.lower():
