@@ -38,7 +38,7 @@ NeuroFly uses a real *Drosophila melanogaster* MaleCNS connectome as the structu
      Replace DEMO_VIDEO_URL with the GitHub-hosted video URL
      once the demo is uploaded to the designated issue.
 -->
-<video src="DEMO_VIDEO_URL" autoplay loop muted playsinline controls width="100%">
+<video src="https://github.com/iamnih4l/NeuroFLY/issues/1#issue-5447737723L" autoplay loop muted playsinline controls width="100%">
   <!-- Fallback if GitHub strips the video tag -->
   <img src="assets/neurofly/readme/demo-preview.svg" width="100%" alt="Demo Preview Placeholder">
 </video>
