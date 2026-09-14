@@ -12,6 +12,8 @@
 >
 > But that's actually possible now.
 
+📖 **[Read the full story behind NeuroFly on LinkedIn](https://www.linkedin.com/pulse/imagine-being-able-make-fly-watch-news-see-how-would-react-nihal-txmac)**
+
 ## 🪰 So I Made the Fly Watch Something.
 
 <div align="center">
