@@ -80,18 +80,18 @@ class YouTubeLiveProvider(NewsProvider):
             now = datetime.now().isoformat()
             
             # Fallback videos based on query
-            embed_url = "https://www.youtube.com/embed/HvZt-nh9sGg?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Stream
+            embed_url = "https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # Default to News
             title = "Live YouTube Broadcast"
             
             if "sports" in self.query.lower():
-                embed_url = "https://www.youtube.com/embed/HvZt-nh9sGg?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Stream
-                title = "Live Sports Feed (Fallback)"
+                embed_url = "https://www.youtube.com/embed/PMDQ82w1pAE?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Sports Stream
+                title = "Live Sports Feed"
             elif "news" in self.query.lower():
-                embed_url = "https://www.youtube.com/embed/HvZt-nh9sGg?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Stream
-                title = "Live Breaking News (Fallback)"
+                embed_url = "https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom News Stream
+                title = "Live Breaking News"
             elif "science" in self.query.lower():
-                embed_url = "https://www.youtube.com/embed/HvZt-nh9sGg?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Stream
-                title = "Live Science Documentary (Fallback)"
+                embed_url = "https://www.youtube.com/embed/Jm8wRjD3xVA?autoplay=1&mute=1&controls=0&modestbranding=1&liveui=1" # User Custom Science Stream
+                title = "Live Science Documentary"
 
             news_item = NewsItem(
                 id=f"fallback-{int(time.time())}",
