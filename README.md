@@ -14,17 +14,7 @@
 
 ## 🪰 So I Made the Fly Watch Something.
 
-<div align="center">
-  <img src="assets/neurofly/readme/fly-watching-world.png" width="100%" alt="NeuroFly Hero Visual">
-</div>
-
-<!-- 
-TO USE THE VIDEO INSTEAD OF THE IMAGE:
-GitHub strips HTML <video> tags. To embed the video so it plays natively:
-1. Drag your MP4 into any GitHub Issue comment box.
-2. Copy the generated https://github.com/user-attachments/... link.
-3. Paste that raw link on a blank line right here (and delete the <img> tag above).
--->
+https://github.com/user-attachments/assets/38efea60-8202-4478-a8f0-35512c354876
 
 The original idea was simple:
 
