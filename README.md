@@ -14,7 +14,9 @@
 
 ## 🪰 So I Made the Fly Watch Something.
 
-https://github.com/user-attachments/assets/38efea60-8202-4478-a8f0-35512c354876
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/38efea60-8202-4478-a8f0-35512c354876" autoplay loop muted playsinline width="100%"></video>
+</div>
 
 The original idea was simple:
 
@@ -32,18 +34,7 @@ NeuroFly uses a real *Drosophila melanogaster* MaleCNS connectome as the structu
 
 ## 🎬 WATCH THE FLY WATCH THE WORLD
 
-<!-- 
-DEMO VIDEO PLACEHOLDER
-To embed the actual demo video:
-1. Drag the demo MP4 into any GitHub Issue.
-2. Copy the https://github.com/user-attachments/... link.
-3. Paste the raw link on a blank line below this comment, replacing the <img> tag.
--->
-<div align="center">
-  <img src="assets/neurofly/readme/demo-preview.svg" width="100%" alt="Demo Preview Placeholder">
-</div>
-
-*(Note: The final demo video placeholder above will be replaced once the issue-hosted demo asset is available.)*
+https://github.com/user-attachments/assets/de23fade-b22a-41fb-ab1b-4e99bf913b4f
 
 ---
 
