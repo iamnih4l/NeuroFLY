@@ -15,7 +15,7 @@
 ## 🪰 So I Made the Fly Watch Something.
 
 <div align="center">
-  <img src="assets/neurofly/readme/fly-watching-world.png" width="100%" alt="NeuroFly Hero Visual">
+  <video src="https://github.com/iamnih4l/NeuroFLY/raw/main/assets/neurofly/readme/Use_the_provided_reference_ima.mp4" autoplay loop muted playsinline width="100%"></video>
 </div>
 
 The original idea was simple:
