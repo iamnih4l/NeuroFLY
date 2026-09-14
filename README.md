@@ -15,8 +15,16 @@
 ## 🪰 So I Made the Fly Watch Something.
 
 <div align="center">
-  <video src="https://github.com/iamnih4l/NeuroFLY/raw/main/assets/neurofly/readme/Use_the_provided_reference_ima.mp4" autoplay loop muted playsinline width="100%"></video>
+  <img src="assets/neurofly/readme/fly-watching-world.png" width="100%" alt="NeuroFly Hero Visual">
 </div>
+
+<!-- 
+TO USE THE VIDEO INSTEAD OF THE IMAGE:
+GitHub strips HTML <video> tags. To embed the video so it plays natively:
+1. Drag your MP4 into any GitHub Issue comment box.
+2. Copy the generated https://github.com/user-attachments/... link.
+3. Paste that raw link on a blank line right here (and delete the <img> tag above).
+-->
 
 The original idea was simple:
 
@@ -34,14 +42,16 @@ NeuroFly uses a real *Drosophila melanogaster* MaleCNS connectome as the structu
 
 ## 🎬 WATCH THE FLY WATCH THE WORLD
 
-<!-- DEMO VIDEO PLACEHOLDER
-     Replace DEMO_VIDEO_URL with the GitHub-hosted video URL
-     once the demo is uploaded to the designated issue.
+<!-- 
+DEMO VIDEO PLACEHOLDER
+To embed the actual demo video:
+1. Drag the demo MP4 into any GitHub Issue.
+2. Copy the https://github.com/user-attachments/... link.
+3. Paste the raw link on a blank line below this comment, replacing the <img> tag.
 -->
-<video src="https://github.com/iamnih4l/NeuroFLY/issues/1#issue-5447737723L" autoplay loop muted playsinline controls width="100%">
-  <!-- Fallback if GitHub strips the video tag -->
+<div align="center">
   <img src="assets/neurofly/readme/demo-preview.svg" width="100%" alt="Demo Preview Placeholder">
-</video>
+</div>
 
 *(Note: The final demo video placeholder above will be replaced once the issue-hosted demo asset is available.)*
 
